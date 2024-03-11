@@ -6,9 +6,7 @@ import { Link, useNavigate } from "react-router-dom";
 import styles from '../styles/Create.module.css'
 
 export function validate(newVideogame) {
-
   let errors = {};
-
   if (!newVideogame.name) {
     errors.name = "Introduce a name";
   } else if (!/^[^\W0-9_][a-zA-Z0-9\s]+$/.test(newVideogame.name)){
@@ -31,14 +29,12 @@ export function validate(newVideogame) {
   }
   return errors;
 }
-
 export function CreateVideogame() {
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const stateGenre = useSelector((state) => state.genres);
   const stateVideogames = useSelector((state)=> state.videogames);
   const platformsArr = ["PC", "PlayStation 3", "PlayStation 4", "PlayStation 5", "macOS", "Linux", "Xbox360", "Android", "Nintendo Switch", "iOS", "Xbox One", "Xbox Series S/X"]
-  
   const [errors, setErrors] = useState({})
 
   const [newVideogame, setNewVideogame] = useState({
@@ -74,7 +70,7 @@ export function CreateVideogame() {
       platforms: "",
       genres: [],
     })
-    await axios.post("http://localhost:5173/videogame/create", newVideogame)
+    await axios.post("http://localhost:3001/videogame/create", newVideogame)
     alert(`${newVideogame.name} was created successfully!`)
     navigate("/home")
     }
@@ -107,6 +103,10 @@ export function CreateVideogame() {
     let arr = newVideogame.genres
     let val = g.target.value
     arr = arr.includes(val) ? arr : arr.push(val)
+   
+    console.log(arr);
+    
+
   }
 
   const handleChoice = (op) => {

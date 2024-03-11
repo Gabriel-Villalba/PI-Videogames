@@ -1,5 +1,5 @@
 import { useEffect } from "react";
-import { Link } from "react-router-dom";
+import { Link , useParams} from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { getDetails } from "../redux/actions/actions";
 import styles from '../styles/Details.module.css'
@@ -7,15 +7,14 @@ import Loader from "./Loader";
 
 
 
-export function DetailsVideogames(props) {
+export function DetailsVideogames() {
+  
   const dispatch = useDispatch();
-  const id = props.match.params.id;
-  const gameDetails = useSelector((state) => state.details);
-
+  const {id}= useParams();
+  const gameDetails = useSelector((state) => state.details); 
   useEffect(() => {
     dispatch(getDetails(id));
-  }, []);
-
+  }, [dispatch, id]);
   return (
     <div className={styles.container}>
       {gameDetails ? 

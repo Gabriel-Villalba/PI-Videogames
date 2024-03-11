@@ -30,6 +30,7 @@ const fetchData = async (url, type, dispatch) => {
   try {
     const response = await axios.get(url); // Espera a que se complete la petición GET
     const data = response.data;
+   
     dispatch({
       type,
       payload: data,
@@ -78,6 +79,7 @@ export function searchVideogame(videogame) {
 
 export function getDetails(videogameId) {
   return function (dispatch) {
+  
     return fetchData(`http://localhost:3001/videogames/${videogameId}`, GET_DETAILS, dispatch)
     /*return axios
       .get(`http://localhost:3001/videogames/${videogameId}`)

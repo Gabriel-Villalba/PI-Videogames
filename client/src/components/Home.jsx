@@ -52,21 +52,21 @@ function Home() {
       <Nav handleClick={handleClick}/>
       <div className={styles.filters}>
         <div>
-      <label className={styles.subtitles}>Filter by genre</label>
+      <label className={styles.subtitles}>Filtrar por género</label>
       <FilterByGenre />
       </div>
         <div>
-        <label className={styles.subtitles}>Show by origin</label>
-        <OriginSelector/>
+          <label className={styles.subtitles}>Mostrar por origen</label>
+          <OriginSelector/>
         </div>
         <div>
-        <label className={styles.subtitles}>Sort alphabetically</label>
+        <label className={styles.subtitles}>Ordenar alfabéticamente</label>
         <select className={styles.selectors} onChange={(e)=>{handleSort(e)}}>{values.map((op,i)=>{
            return <option value={op} key={i}>{op}</option>})}
           </select>
         </div>
         <div>
-        <label className={styles.subtitles}>Sort by rating</label>
+        <label className={styles.subtitles}>Ordenar por rating</label>
         <select className={styles.selectors} onChange={(e)=>{handleOrder(e)}}>{valuesRating.map((op,i)=>{
             return <option value={op} key={i}>{op}</option> })}
           </select>
