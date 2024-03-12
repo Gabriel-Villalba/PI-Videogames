@@ -13,13 +13,18 @@ module.exports = (sequelize) => {
       type: DataTypes.TEXT,
       allowNull: false
     },
+    imageUrl:{
+      type : DataTypes.STRING,
+      defaultValue:'https://via.placeholder',
+      allowNull: false
+    },   
     platforms: {
       type: DataTypes.STRING,
       allowNull: false
     }, 
     releaseDate: {
       type: DataTypes.STRING
-    },
+    },   
     rating: {
       type: DataTypes.INTEGER
     },

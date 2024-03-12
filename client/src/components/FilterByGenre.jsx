@@ -46,7 +46,7 @@ const FilterByGenre = () => {
   return (
     <>
       <select className={styles.selectors} onChange={handleChange}>
-        <option disabled>Elige género...</option>
+        <option disabled selected>Elige género...</option>
         {allGenres.map((op) => (
           <option key={op.id} value={op.id}>
             {op.name}

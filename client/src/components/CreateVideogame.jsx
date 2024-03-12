@@ -49,32 +49,48 @@ export function CreateVideogame() {
 
   useEffect(() => {
     dispatch(getGenres());
-  }, []);
+  }, [dispatch, newVideogame, setNewVideogame]);
 
   const validateName = (name) => {
     let validate = stateVideogames.map(el => el.name)
     return validate.includes(name) 
   }
 
-  const handleSubmit = async (e) => {
-    e.preventDefault();
-    if(validateName(newVideogame.name)){
-      alert(`${newVideogame.name} already exists`)
-    }else{
-    setNewVideogame({
-      name: "",
-      releaseDate: "",
-      rating: "",
-      imageUrl: "",
-      description: "",
-      platforms: "",
-      genres: [],
-    })
-    await axios.post("http://localhost:3001/videogame/create", newVideogame)
-    alert(`${newVideogame.name} was created successfully!`)
-    navigate("/home")
+  // const handleSubmit = async (e) => {
+  //   e.preventDefault();
+  //   if(validateName(newVideogame.name)){
+  //     alert(`${newVideogame.name} already exists`)
+  //   }else{
+  //   setNewVideogame({
+  //     name: "",
+  //     releaseDate: "",
+  //     rating: "",
+  //     imageUrl: "",
+  //     description: "",
+  //     platforms: "",
+  //     genres: [],
+  //   })
+  //   await axios.post("http://localhost:3001/videogame/create", newVideogame)
+  //   alert(`${newVideogame.name} was created successfully!`)
+  //   navigate("/home")
+  //   }
+  // };
+  const handleSubmit = async (e) => {   
+  e.preventDefault();
+  if (validateName(newVideogame.name)) {
+    alert(`${newVideogame.name} already exists`);
+  } else {
+    try {
+      console.log("nuevo Juego de videos",newVideogame);
+      await axios.post("http://localhost:3001/videogame/create", newVideogame);
+      alert(`${newVideogame.name} was created successfully!`);
+      navigate("/home");
+    } catch (error) {
+      console.error("Error creating the videogame:", error);
+     
     }
-  };
+  }
+};
 
   const handleChange = (e) => {
     setNewVideogame({
@@ -103,10 +119,8 @@ export function CreateVideogame() {
     let arr = newVideogame.genres
     let val = g.target.value
     arr = arr.includes(val) ? arr : arr.push(val)
-   
-    console.log(arr);
     
-
+    return arr 
   }
 
   const handleChoice = (op) => {

@@ -24,7 +24,10 @@ body {
     padding: 10px;
     font-size: 25px;
     margin: 20px;
-    color:#035106
+    border-radius: 5px;
+    border: solid 1px  rgba(185, 223, 130, 0.795);;
+    background-color: #81aee9;
+    color:rgba(187, 233, 122, 0.795);
 }
 
 .filters {

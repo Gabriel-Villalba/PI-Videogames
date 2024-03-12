@@ -20,7 +20,7 @@ function Home() {
   const valuesRating = ["Ascendent", "Descendent"];
 
   const [currentPage, setCurrentPage] = useState(1);
-  const vgsPerPage = 15;
+  const vgsPerPage = 15;//*elementos mostrados por pagina
 
   const lastVg = currentPage * vgsPerPage;
   const firstVg = lastVg - vgsPerPage;
@@ -73,7 +73,7 @@ function Home() {
         </div>
       </div>
       </div>
-        <Pagination vgsPerPage={vgsPerPage} totalVgs={allVideogames.length} paginate={paginate}/>
+        <Pagination vgsPerPage={vgsPerPage} totalVgs={allVideogames.length} currentPage={currentPage} paginate={paginate}/>
         <div className={styles.cards}>
         {currentVg.length > 0 ? (
           currentVg.map((vg, index) => {
@@ -93,7 +93,7 @@ function Home() {
         <Loader/>
         )}
       </div>
-      <Pagination vgsPerPage={vgsPerPage} totalVgs={allVideogames.length} paginate={paginate}/>
+      <Pagination vgsPerPage={vgsPerPage} totalVgs={allVideogames.length} currentPage={currentPage} paginate={paginate}/>
     </div>
   );
 }

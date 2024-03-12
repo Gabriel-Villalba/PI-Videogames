@@ -5,12 +5,19 @@
 .buttonPage {
   margin-top: 10px;
   border-radius: 4.5px;
+  background-color: rgb(54, 195, 124);
+  color: white;
+  font-size: x-large;
+  cursor: pointer;
+}
+.pageActive{
+  margin-top: 10px;
+  border-radius: 4.5px;
   background-color: green;
   color: white;
   font-size: x-large;
   cursor: pointer;
 }
-
 .buttonPage:hover {
   background-color: greenyellow;
   color: black;

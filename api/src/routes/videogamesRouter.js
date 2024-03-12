@@ -19,7 +19,7 @@ videogamesRouter.get("/", async (req, res) => {
 });
 
 videogamesRouter.get("/:id", async (req, res) => {
-  console.log(req.params.id);
+ 
   const { id } = req.params;
 
   let vg 
