@@ -1,11 +1,9 @@
-const { Videogame, Genre } = require("../db.js");
+const { Videogame,Genre } = require("../db.js");
 const { APIKEY } = process.env;
 const axios = require("axios");
 
 const getApiVideogames = async() => {
-  
   let apiVideogames = [];
-  
   for (let i = 1; i <= 5; i++) {
     let api = await axios.get(`https://api.rawg.io/api/games?key=${APIKEY}&page=${i}`);
     api.data.results.map((game) => {

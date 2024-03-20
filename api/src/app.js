@@ -19,10 +19,14 @@ server.use(bodyParser.json({ limit: '50mb' }));
 server.use(cookieParser());
 server.use(morgan('dev'));
 server.use((req, res, next) => {
-  res.header('Access-Control-Allow-Origin', "*"); // update to match the domain you will make the request from
-  res.header('Access-Control-Allow-Credentials', 'true');
-  res.header('Access-Control-Allow-Headers', 'Origin, X-Requested-With, Content-Type, Accept');
-  res.header('Access-Control-Allow-Methods', 'GET, POST, OPTIONS, PUT, DELETE');
+  res.header('Access-Control-Allow-Origin', "*"); //* Este encabezado indica a los navegadores web 
+                                                  //*que se permiten solicitudes CORS desde cualquier origen.
+  res.header('Access-Control-Allow-Credentials', 'true');//*Este encabezado indica a los navegadores web 
+                                                          //*que se permiten solicitudes CORS con credenciales.
+  res.header('Access-Control-Allow-Headers', 'Origin, X-Requested-With, Content-Type, Accept');//* Este encabezado indica a los navegadores web que se permiten 
+                                                                                                //*solicitudes CORS con los encabezados especificados.
+  res.header('Access-Control-Allow-Methods', 'GET, POST, OPTIONS, PUT, DELETE');//*Este encabezado indica a los navegadores web que se permiten 
+                                                                               //*solicitudes CORS con los métodos HTTP especificados.
   next();
 });
 

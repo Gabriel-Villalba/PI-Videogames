@@ -1,48 +1,27 @@
 require('dotenv').config();
-const { Sequelize } = require('sequelize');
-const fs = require('fs');//*el módulo ‘fs’, que proporciona funcionalidades para trabajar con archivos y directorios en el sistema de archivos local.
-const path = require('path');
-const {
-  DB_USER, DB_PASSWORD, DB_HOST,
-} = process.env;
+const {Sequelize} = require('sequelize');
+const {DB_USER, DB_PASSWORD, DB_HOST,} = process.env;
+const {modelGenre} = require ("./models/Genre")
+const{modelVideogame} = require ("./models/Videogame")
 
 const sequelize = new Sequelize(`postgres://${DB_USER}:${DB_PASSWORD}@${DB_HOST}/videogames`, {
   logging: false, // set to console.log to see the raw SQL queries
   native: false, // lets Sequelize know we can use pg-native for ~30% more speed
- 
 });
+modelGenre(sequelize)//*CREATE TABLE genre
+modelVideogame(sequelize)
 
-const basename = path.basename(__filename);
-
-const modelDefiners = [];
-
-//! Leemos todos los archivos de la carpeta Models, los requerimos y agregamos al arreglo modelDefiners
-fs.readdirSync(path.join(__dirname, './models'))
-  .filter((file) => (file.indexOf('.') !== 0) && (file !== basename) && (file.slice(-3) === '.js'))
-  .forEach((file) => {
-    modelDefiners.push(require(path.join(__dirname, './models', file)));
-  });
-
-// Injectamos la conexion (sequelize) a todos los modelos
-modelDefiners.forEach(model => model(sequelize));
-// Capitalizamos los nombres de los modelos ie: product => Product
-let entries = Object.entries(sequelize.models);
-let capsEntries = entries.map((entry) => [entry[0][0].toUpperCase() + entry[0].slice(1), entry[1]]);
-sequelize.models = Object.fromEntries(capsEntries);
-
-// En sequelize.models están todos los modelos importados como propiedades
-// Para relacionarlos hacemos un destructuring
-const { Videogame, Genre } = sequelize.models;
-//const  { Genre } = sequelize.models.Genre
-
+const Genre = sequelize.models.genre
+const Videogame = sequelize.models.videogame
 // Aca vendrian las relaciones
 Videogame.belongsToMany(Genre, { through: 'VideogameGenre' });//* atraves de :
 Genre.belongsToMany(Videogame, { through: 'VideogameGenre' });
-// Product.hasMany(Reviews);
-console.log("base de datos en linea");
+// hasOne 1 - 1 
+// hasMany 1 - N / role.hasMany(user)
+// belongsTo N - 1
+// belongsToMany N - N
 module.exports = {
-  //...sequelize.models, //* para poder importar los modelos así: const { Product, User } = require('./db.js');
-  Videogame,
   Genre,
+  Videogame,
   conn: sequelize,     //* para importart la conexión { conn } = require('./db.js');
 };

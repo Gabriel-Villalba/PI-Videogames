@@ -11,10 +11,12 @@ export function DetailsVideogames() {
   
   const dispatch = useDispatch();
   const {id}= useParams();
+
   const gameDetails = useSelector((state) => state.details); 
   useEffect(() => {
     dispatch(getDetails(id));
-  }, [dispatch, id]);
+  }, [dispatch,id]);
+  
   return (
     <div className={styles.container}>
       {gameDetails ? 
@@ -34,7 +36,10 @@ export function DetailsVideogames() {
         <button className={styles.buttonBack}>Back</button>
       </Link>
     </div>
+    
   );
+  
 }
+
 
 export default DetailsVideogames;

@@ -47,7 +47,6 @@ export function getVideogames() {
 }
 
 export function getGenres() {
- 
   return function (dispatch) {
     return fetchData(`http://localhost:3001/genres`, GET_GENRES, dispatch );
   };
@@ -62,37 +61,11 @@ export function getByGenre(name) {
 export function searchVideogame(videogame) {
   return function (dispatch) {
     return fetchData(`http://localhost:3001/videogames?name=${videogame}`, SEARCH_VIDEOGAME, dispatch )
-    // return axios
-    //   .get(`http://localhost:3001/videogames?name=${videogame}`)
-    //   .then((response) => response.data)
-    //   .then((data) => {
-    //     dispatch({
-    //       type: SEARCH_VIDEOGAME,
-    //       payload: data,
-    //     });
-    //   })
-    //   .catch((error) => {
-    //     alert("VIDEOGAME NOT FOUND", error);
-    //   });
   };
 }
-
 export function getDetails(videogameId) {
   return function (dispatch) {
-  
     return fetchData(`http://localhost:3001/videogames/${videogameId}`, GET_DETAILS, dispatch)
-    /*return axios
-      .get(`http://localhost:3001/videogames/${videogameId}`)
-      .then((response) => response.data)
-      .then((data) => {
-        dispatch({
-          type: GET_DETAILS,
-          payload: data,
-        });
-      })
-      .catch((error) => {
-        alert("VIDEOGAME NOT FOUND", error);
-      });*/
   };
 }
 

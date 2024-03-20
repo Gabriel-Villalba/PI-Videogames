@@ -1,43 +1,15 @@
-// const { Router } = require("express");
-// const bodyParser = require("body-parser");
-// const createVideogame = require ('../controllers/createVideogame')
-
-// const videogameRouter = Router();
-
-// // Middleware para analizar el cuerpo de las solicitudes
-// videogameRouter.use(bodyParser.json());
-// videogameRouter.use(bodyParser.urlencoded({ extended: true }));
- 
-// // Crear un nuevo videojuego
-// videogameRouter.post("/", async (req, res) => {
-//     try {
-//         const videogame = req.body;
-//         console.log(videogame);
-//         const videogameCreated = await createVideogame(videogame);
-//         res.status(200).json(videogameCreated);
-//     } catch (error) {
-//         console.error(error);
-//         return res.status(400).json({ error: "Error creating videogame." });
-//     }
-// });  
-
-
-// module.exports = videogameRouter;
-
-
 const { Router } = require("express");
-const { Videogame, Genre } = require("../db.js");
-
+const createVideogame = require ("../controllers/createVideogame")
 const videogameRouter = Router();
-
+const { Videogame, Genre } = require("../db.js");
 // Ruta para crear un videojuego: http://localhost:3001/videogame/create
 videogameRouter.post("/create", async (req, res) => {
   try {
     let rating =parseInt(req.body.rating)
     const { name, releaseDate, imageUrl, description, platforms, genres } = req.body;
-    
     // Crear un nuevo registro de videojuego
-    const videogameCreated = await Videogame.create({
+     const videogameCreated = await /*createVideogame ({ name, releaseDate, imageUrl, description, platforms, genres }, rating)*/
+    Videogame.create({
       name,
       releaseDate,
       imageUrl,
@@ -46,7 +18,6 @@ videogameRouter.post("/create", async (req, res) => {
       platforms,
       createdInDb: true,
     });
-
     // Asociar los géneros al videojuego creado
     for (const genero of genres) {
       const generoDb = await Genre.findOne({
@@ -60,7 +31,8 @@ videogameRouter.post("/create", async (req, res) => {
     }
     
     return res.send(videogameCreated);
-  } catch (e) {
+  }
+ catch (e) {
     console.error(e);
     return res.status(500).send("Error al crear el videojuego.");
   }
